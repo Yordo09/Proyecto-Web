@@ -1,0 +1,143 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+DROP database if exists proyectoyek;
+
+create database proyectoyek;
+
+use proyectoyek
+
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `user` VARCHAR(20) unique NOT NULL,
+  `pass` VARCHAR(20) NOT NULL,
+  `idtipou` INT(5) NOT NULL,
+  `idclie` INT(9) NULL DEFAULT 0,
+  UNIQUE INDEX `user_UNIQUE` (`user` ASC),
+  INDEX `fk_usuario_tipouser` (`idtipou` ASC),
+  INDEX `fk_usuario_cliente1_idx` (`idclie` ASC),
+  CONSTRAINT `fk_usuario_tipouser`
+    FOREIGN KEY (`idtipou`)
+    REFERENCES `tipouser` (`idtipouser`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_usuario_cliente1`
+    FOREIGN KEY (`idclie`)
+    REFERENCES `cliente` (`idcliente`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `tipouser` (
+  `idtipouser` INT(5) NOT NULL auto_increment,
+  `tipo` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`idtipouser`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `cliente` (
+  `idcliente` INT(9)  auto_increment NOT NULL,
+  `nombre` VARCHAR(50) NOT NULL,
+  `apepat` VARCHAR(50) NOT NULL,
+  `apemat` VARCHAR(50) NOT NULL,
+  `fnac` DATE NOT NULL,
+  `edad` INT(11) NOT NULL,
+  `peso` VARCHAR(10) NULL ,
+  `altura` VARCHAR(10) null,
+  `telefono` VARCHAR(20) NOT NULL,
+  `direccion` VARCHAR(200) NOT NULL,
+  `dieta` LONGTEXT NULL ,
+  `observaciones` LONGTEXT NULL,
+  PRIMARY KEY (`idcliente`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `tipoemp` (
+  `idtipoemp` INT(5) NOT NULL auto_increment,
+  `tipo` VARCHAR(50) not NULL ,
+  PRIMARY KEY (`idtipoemp`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `empleado` (
+  `idempleado` INT(6) NOT NULL auto_increment,
+  `nombre` VARCHAR(50) NOT NULL,
+  `apepat` VARCHAR(50) NOT NULL,
+  `apemat` VARCHAR(50) NOT NULL,
+  `fnac` DATE NOT NULL,
+  `fcontrato` DATE NOT NULL,
+  `edad` INT(11) NOT NULL,
+  `sexo` VARCHAR(2) NOT NULL,
+  `telefono` VARCHAR(20) NOT NULL,
+  `idtipoe` INT(5) NOT NULL,
+  PRIMARY KEY (`idempleado`),
+  INDEX `fk_empleado_tipoemp1_idx` (`idtipoe` ASC),
+  CONSTRAINT `fk_empleado_tipoemp1`
+    FOREIGN KEY (`idtipoe`)
+    REFERENCES `tipoemp` (`idtipoemp`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `pagos` (
+  `idpago` INT(9) NOT NULL AUTO_INCREMENT,
+  `cantidad` VARCHAR(10) NOT NULL,
+  `fpago` DATE NOT NULL,
+  `idclie` INT(9) NOT NULL,
+  PRIMARY KEY (`idpago`),
+  INDEX `fk_pagos_cliente1_idx` (`idclie` ASC),
+  CONSTRAINT `fk_pagos_cliente1`
+    FOREIGN KEY (`idclie`)
+    REFERENCES `cliente` (`idcliente`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `rutina` (
+  `idrutina` INT(11) NOT NULL AUTO_INCREMENT,
+  `rutina` LONGTEXT NOT NULL,
+  `series` VARCHAR(3) NOT NULL,
+  `repeticiones` VARCHAR(3) NOT NULL,
+  `dia` VARCHAR(30) NOT NULL,
+  `idclie` INT(9) NOT NULL,
+  PRIMARY KEY (`idrutina`),
+  INDEX `fk_rutina_cliente1_idx` (`idclie` ASC),
+  CONSTRAINT `fk_rutina_cliente1`
+    FOREIGN KEY (`idclie`)
+    REFERENCES `cliente` (`idcliente`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+
+CREATE TABLE IF NOT EXISTS `statusclientesalud` (
+  `idclie` INT(9) NOT NULL,
+  `status` VARCHAR(30) NOT NULL DEFAULT 'Activo',
+  `finicial` DATE NOT NULL,
+  `ffinal` DATE NOT NULL,
+  `motivo` LONGTEXT NOT NULL,
+  INDEX `fk_statusclientesalud_cliente1_idx` (`idclie` ASC),
+  CONSTRAINT `fk_statusclientesalud_cliente1`
+    FOREIGN KEY (`idclie`)
+    REFERENCES `cliente` (`idcliente`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
