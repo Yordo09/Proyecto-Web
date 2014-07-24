@@ -1,0 +1,270 @@
+@import url('reset.css');
+@import url('fuentes.css');
+
+/*--- Estilos generales ---*/
+
+body {
+	background: #2d2d2d;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+a {
+	text-decoration: none;
+	color: #fff;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#wrap {
+	width: 960px;
+	margin: auto;
+	clear: both;
+}
+
+
+/*--- HEADER ---*/
+
+header {
+	width: 100%;
+	float: left;
+	background: -moz-linear-gradient(top, #ffffff 0%, #e4e0e0 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e4e0e0)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%,#e4e0e0 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%,#e4e0e0 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%,#e4e0e0 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ffffff 0%,#e4e0e0 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e4e0e0',GradientType=0 ); /* IE6-9 */
+	box-shadow: 0px 3px 5px #000;
+	-moz-box-shadow: 0px 3px 5px #000;
+	-webkit-box-shadow: 0px 3px 5px #000;
+}
+
+#subheader {
+	width: 960px;
+	margin: auto;
+}
+
+#logotipo {
+	float: left;
+	width: 300px;
+	padding:10px 0px;
+}
+
+#logotipo a {
+	font-family: ubuntu;
+	font-size: 45px;
+	color: #000;
+}
+
+#logotipo a:hover {
+	text-decoration: none;
+}
+
+/*--- MENU ---*/
+
+header #subheader nav {
+	float: left;
+	width: 660px;
+	padding: 30px 0px;
+	text-align: right;
+}
+
+header #subheader nav ul li {
+	display: inline;
+	font-family: ubuntu;
+}
+header #subheader nav ul li a {
+	color: #000;
+	font-size: 18px;
+	padding: 10px;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+}
+
+header #subheader nav ul li a:hover {
+	color: #fff;
+	background: #1798af;
+	text-decoration: none;
+}
+
+/*--- MAIN ---*/
+
+#main {
+	width: 100%;
+	margin: 20px 0px 0px 0px;
+	float: left;
+}
+
+/*--- SLIDESHOW ---*/
+
+#slideshow {
+	width: 960px;
+	height: 260px;
+	float: left;
+	background: #000;
+	border: solid 20px #fff;
+	margin-bottom: 10px;
+}
+
+/*--- Bienvenidos ---*/
+
+#bienvenidos {
+	width: 920px;
+	float: left;
+	padding: 20px;
+		background: #46793a; /* Old browsers */
+		background: -moz-linear-gradient(top, #46793a 1%, #2d4c1e 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#46793a), color-stop(100%,#2d4c1e)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, #46793a 1%,#2d4c1e 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top, #46793a 1%,#2d4c1e 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top, #46793a 1%,#2d4c1e 100%); /* IE10+ */
+		background: linear-gradient(to bottom, #46793a 1%,#2d4c1e 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#46793a', endColorstr='#2d4c1e',GradientType=0 ); /* IE6-9 */
+	margin: 20px 0px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	box-shadow: 0px 2px 2px #000;
+	-moz-box-shadow: 0px 2px 2px #000;
+	-webkit-box-shadow: 0px 2px 2px #000;
+}
+
+#bienvenidos article h2 {
+	font-family: ubuntu-b;
+	color: #fff;
+	font-size: 30px;
+	margin-bottom: 10px;
+}
+
+#bienvenidos article {
+	color: #fff;
+	line-height: 25px;
+}
+
+#bienvenidos table {
+	background:#dcddc0 url('cell-blue.jpg');
+	font-family: verdana,arial,sans-serif;
+	font-size:20px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+
+#bienvenidos table td {
+	background:#dcddc0 url('cell-blue.jpg');
+	text-align: center;
+	border-width: 1px;
+	padding: 10px;
+	border-style: solid;
+	border-color: #999999;
+}
+
+
+/*--- Footer ---*/
+
+footer {
+	width: 100%;
+	float: left;
+	clear: both;
+	box-shadow: 0px 2px 2px #000;
+	-moz-box-shadow: 0px 2px 2px #000;
+	-webkit-box-shadow: 0px 2px 2px #000;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background: #2f2f2f; /* Old browsers */
+	background: -moz-linear-gradient(top, #2f2f2f 1%, #242424 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#2f2f2f), color-stop(100%,#242424)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #2f2f2f 1%,#242424 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #2f2f2f 1%,#242424 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #2f2f2f 1%,#242424 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #2f2f2f 1%,#242424 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f2f2f', endColorstr='#242424',GradientType=0 ); /* IE6-9 */
+}
+
+footer section {
+	width: 440px;
+	float: left;
+	padding: 20px;
+}
+
+footer #acerca-de {
+	font-family: Arial, Helvetica;
+	font-size: 12px;
+	color: #8c8c8c;
+	text-align: justify;
+	line-height: 20px;
+}
+
+footer #acerca-de h3 {
+	font-family: ubuntu;
+	font-size: 20px;
+	color: #fff;
+	margin-bottom: 5px;
+}
+
+footer #redes-s > div {
+	width: 215px;
+	height: 60px;
+	float: left;
+	opacity: 0.5;
+}
+
+footer #redes-s > div a {
+	width: 220px;
+	height: 60px;
+	display: inline-block;
+}
+
+footer #redes-s .email {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background: url(../imagenes/gmail.png);
+	margin-bottom: 15px;
+}
+
+footer #redes-s .twitter {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background: url(../imagenes/twitter.jpg);
+	margin-bottom: 15px;
+	margin-left: 5px;
+}
+
+footer #redes-s .youtube {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background: url(../imagenes/youtube.png);
+}
+
+footer #redes-s .facebook {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background: url(../imagenes/facebook.gif);
+	margin-left: 5px;
+}
+
+footer #redes-s > div:hover {
+	opacity: 1;
+}
+
+#copyright {
+	float: left;
+	width: 960px;
+	margin: 10px 0px;
+}
+
+#copyright {
+	text-align: center;
+	font-size: 12px;
+	color: #fff;
+	font-family: ubuntu;
+}
