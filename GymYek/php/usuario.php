@@ -20,7 +20,7 @@
 		private $dieta;
 		private $obs;
 
-		
+		private $idEm;
 
 		
 		function __construct()
@@ -34,11 +34,28 @@
 			switch ($this->accion) {
 				case 'inserClie':
 					$this->insertarCli();
-					echo "<a href = '/GymYek/empleado_registroClientes.html' > Volver al menu </a>";
+					header("Location: /GymYek/empleado_registroClientes.html");
+					/**echo "<a href = '/GymYek/empleado_registroClientes.html' > Volver al menu </a>";**/
+					break;
+				case 'admin_inserClie':
+					$this->insertarCli();
+					header("Location: /GymYek/admin_clientes.html");
+					/**echo "<a href = '/GymYek/empleado_registroClientes.html' > Volver al menu </a>";**/
 					break;
 				case 'inserPago':
 					$this->insertarPag();
-					echo "<a href = '/GymYek/empleado_registroPagos.html' > Volver al menu </a>";
+					header("Location: /GymYek/empleado_registroPagos.html");
+					/**echo "<a href = '/GymYek/empleado_registroPagos.html' > Volver al menu </a>";**/
+					break;
+				case'admin_Pago':
+					$this->insertarPag();
+					header("Location: /GymYek/admin_pagos.html");
+					break;
+				case 'admin_inserEmpleado':
+					echo "entre a insertarempleado";
+					$this->insertarEmpleado();
+					echo "<a href = '/GymYek/admin_empleados.html' > Volver al menu </a>";
+					/**header("Location: /GymYek/admin_empleados.html");**/
 					break;
 				
 				default:
@@ -168,7 +185,71 @@
 			$this->idclie = $idclie;
 		}
 
+		/** -----------TablaEmpleado------------- **/
 
+		public function getNombreEm(){
+			return $this->nombreEm = $_POST['nombreEm'];
+		}
+
+		public function setNombreEm($nombreEm){
+			$this->nombreEm = $nombreEm;
+		}
+
+		public function getApepatEm(){
+			return $this->apepatEm = $_POST['apepatEm'];
+		}
+
+		public function setApepatEm($apepatEm){
+			$this->apepatEm = $apepatEm;
+		}
+
+		public function getApematEm(){
+			return $this->apematEm = $_POST['apematEm'];
+		}
+
+		public function setApematEm($apematEm){
+			$this->apematEm = $apematEm;
+		}
+
+		public function getFnacEm(){
+			return $this->fnacEm = $_POST['fnacEm'];
+		}
+
+		public function setFnacEm($fnacEm){
+			$this->fnacEm = $fnacEm;
+		}
+
+		public function getEdadEm(){
+			return $this->edadEm = $_POST['edadEm'];
+		}
+
+		public function setEdadEm($edadEm){
+			$this->edadEm = $edadEm;
+		}
+
+		public function getSexo(){
+			return $this->sexo = $_POST['sexo'];
+		}
+
+		public function setSexo($sexo){
+			$this->sexo = $sexo;
+		}
+
+		public function getTelEm(){
+			return $this->telEm = $_POST['telEm'];
+		}
+
+		public function setTelEm($telEm){
+			$this->telEm = $telEm;
+		}
+
+		public function getIdEm(){
+			return $this->idEm = $_POST['idEm'];
+		}
+
+		public function setIdEm($idEm){
+			$this->idEm = $idEm;
+		}
 
 
 		/**---------FUNCIONES DE DB------------**/
@@ -177,6 +258,33 @@
 			$this->db->insertCliente($this->getNombre(),$this->getApepat(),$this->getApemat(),
 				$this->getFnac(),$this->getEdad(),$this->getPeso(),$this->getAltura(),$this->getTel(),
 				$this->getDir(),$this->getDieta(), $this->getObs());
+		}
+
+		public function insertarEmpleado(){
+
+			switch ($this->getIdEm()) {
+				case 'Administrador':
+					$intvalue = 1;
+					$this->idEm = intval($intvalue);
+					break;
+				case 'Empleado':
+					$intvalue = 2;
+					$this->idEm = intval($intvalue);
+					echo $this->idEm;
+					break;
+				case 'Instructor':
+					$intvalue = 3;
+					$this->idEm = intval($intvalue);
+					break;
+
+				default:
+					# code...
+					break;
+			}
+
+
+			$this->db->insertEmpleado($this->getNombreEm(),$this->getApepatEm(),$this->getApematEm(),
+				$this->getFnacEm(),$this->getEdadEm(), $this->getSexo(), $this->getTelEm(), $this->idEm);
 		}
 
 

@@ -27,6 +27,20 @@
 			}
 		}
 
+		public function insertEmpleado($nombreEm, $apePEm, $apeMEm, $fnacEm, $edadEm, $sexo, $telEm, $idEm){
+			$stmt = "INSERT INTO empleado VALUES (0 , ?, ?, ?, ?, ?, ?, ?, ?)";
+			$query = $this->dbConx->prepareQ($stmt);
+
+
+			$query->bind_param('ssssissi', $nombreEm, $apePEm, $apeMEm, $fnacEm, $edadEm, $sexo, $telEm, $idEm);
+			if($query->execute()){
+				echo "Si inserto     ";
+			}else{
+				echo "    faCHOOo la puta madre";
+				echo "Execute Failed: (" . $query->errno . ") " . $query->error;
+			}
+		}
+
 		public function insertPago($cantidad, $fpago, $idclie){
 			$stmt = "INSERT INTO pagos VALUES (0, ?, ?, ?)";
 			$query = $this->dbConx->prepareQ($stmt);

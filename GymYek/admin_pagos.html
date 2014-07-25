@@ -1,0 +1,70 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset = "UTF-8">
+		<link rel="stylesheet" type="text/css" href="css/estilos.css"/>
+		<title>Gimnasio Yek</title>
+	</head>
+
+	<body>
+
+		<header>
+			<div id="subheader">
+				<div id="logotipo"><p><a href="#">Gimnasio Yek</a></p></div>
+				<nav>
+					<ul>
+						<li><a href="admin_pagos.html">Pagos</a></li>
+						<li><a href="#">Verificar Pagos</a></li>
+						<li><a href="admin_clientes.html">Clientes</a></li>
+						<li><a href="#">Ver Clientes</a></li>
+						<li><a href="admin_empleados.html">Empleado</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<section id="wrap">
+
+			<section id="main">
+
+				<section id="bienvenidos">
+					<article>
+						<hgroup><h2 align="center">Registro de Pagos</h2></hgroup>
+						<div align="center">
+						<table width="50%" border="1" align="center">
+						    <tr><form action="php/usuario.php" name="formCliente" method="post">
+						    	<td>Cantidad: <input type="text" name="accion" value="admin_Pago" hidden></td>
+						    	<td><input type="number" name="canti" min="1" value="0" required></input></td>
+							</tr>
+							<tr>
+							    <td>Fecha de pago: </td>
+							    <td><input type="date" name="fpago" required></input></td>
+							</tr>
+							<tr>
+							    <td>Numero de Cliente: </td>
+							    <td><input type="number" name="idClien" min="1" value="0" required></input></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><input type="submit" align="center" name="btnPago" value="Guardar Pago"></td>
+							</tr>
+
+							</form>
+						</table></div>
+
+					</article>
+
+				</section>
+
+			</section>
+
+			<footer>
+
+			</footer>
+
+			<div id="copyright"><p>Creado por Jose Antonio Esquinca Bonilla</p><BR>2012-2013</div>
+
+		</section>
+
+	</body>
+</html>
