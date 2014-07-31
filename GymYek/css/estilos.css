@@ -147,6 +147,7 @@ header #subheader nav ul li a:hover {
 #bienvenidos table {
 	background:#dcddc0 url('cell-blue.jpg');
 	font-family: verdana,arial,sans-serif;
+
 	font-size:20px;
 	color:#333333;
 	border-width: 1px;
@@ -155,6 +156,15 @@ header #subheader nav ul li a:hover {
 }
 
 #bienvenidos table td {
+	background:#dcddc0 url('cell-blue.jpg');
+	text-align: center;
+	border-width: 1px;
+	padding: 10px;
+	border-style: solid;
+	border-color: #999999;
+}
+
+#bienvenidos table th {
 	background:#dcddc0 url('cell-blue.jpg');
 	text-align: center;
 	border-width: 1px;

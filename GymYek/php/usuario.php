@@ -20,6 +20,7 @@
 		private $dieta;
 		private $obs;
 
+		private $idclie;
 		private $idEm;
 
 		
@@ -52,12 +53,25 @@
 					header("Location: /GymYek/admin_pagos.html");
 					break;
 				case 'admin_inserEmpleado':
-					echo "entre a insertarempleado";
-					$this->insertarEmpleado();
-					echo "<a href = '/GymYek/admin_empleados.html' > Volver al menu </a>";
-					/**header("Location: /GymYek/admin_empleados.html");**/
+					$this->insertarEmpleado();					
+					header("Location: /GymYek/admin_empleados.html");
 					break;
-				
+				case 'Vcliente':
+					$this->verCliente();
+
+					break;
+				case 'updDieta':
+					$this->upClienDie();
+					header("Location: /GymYek/empleadoInstructor_Dieta.html");
+					break;
+				case 'updObs':
+					$this->upClienObs();
+					header("Location: /GymYek/empleadoInstructor_Observaciones.html");
+					break;
+				case 'inserRutina':
+					$this->insertarRut();
+					header("Location: /GymYek/empleadoInstructor_Rutina.html");
+					break;
 				default:
 					# code...
 					break;
@@ -251,6 +265,41 @@
 			$this->idEm = $idEm;
 		}
 
+		/**---------TABLA RUTINA------------**/
+
+
+		public function getRutina(){
+			return $this->rutina = $_POST['rutina'];
+		}
+
+		public function setRutina($rutina){
+			$this->rutina = $rutina;
+		}
+
+		public function getSeries(){
+			return $this->series = $_POST['series'];
+		}
+
+		public function setSeries($series){
+			$this->series = $series;
+		}
+
+		public function getRepeticiones(){
+			return $this->repeticiones = $_POST['repeticiones'];
+		}
+
+		public function setRepeticiones($repeticiones){
+			$this->repeticiones = $repeticiones;
+		}
+
+		public function getDia(){
+			return $this->dia = $_POST['dia'];
+		}
+
+		public function setDia($dia){
+			$this->dia = $dia;
+		}
+
 
 		/**---------FUNCIONES DE DB------------**/
 
@@ -266,6 +315,7 @@
 				case 'Administrador':
 					$intvalue = 1;
 					$this->idEm = intval($intvalue);
+					echo $this->idEm;
 					break;
 				case 'Empleado':
 					$intvalue = 2;
@@ -275,6 +325,7 @@
 				case 'Instructor':
 					$intvalue = 3;
 					$this->idEm = intval($intvalue);
+					echo $this->idEm;
 					break;
 
 				default:
@@ -292,6 +343,22 @@
 			$this->db->insertPago($this->getCantidad(), $this->getFpago(), $this->getIdclie());
 		}
 
+		public function verCliente(){
+			$this->db->verClientes();
+		}
+
+		public function upClienDie(){
+			$this->db->updClienDieta($this->getDieta(), $this->getIdclie());
+		}
+
+		public function upClienObs(){
+			$this->db->updClienObs($this->getObs(), $this->getIdclie());
+		}
+
+		public function insertarRut(){
+			$this->db->insertRutina($this->getRutina(),$this->getSeries(), $this->getRepeticiones(),
+			 $this->getDia(), $this->getIdclie());
+		}
 	}
 
 	

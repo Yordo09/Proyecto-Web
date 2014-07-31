@@ -17,10 +17,22 @@
 		}
 
 		private function __construct(){
-			$this->_mysqli = new mysqli('localhost', 'root', "", 'proyectoyek');
+			$this->Conectar();
+			/**$this->_mysqli = new mysqli('localhost', 'root', "", 'proyectoyek');
 			if($this->_mysqli->connect_error){
 				die($this->_mysqli->connect_error);
-			}
+			}**/
+		}
+
+		public function Conectar(){
+	        $this ->dbcon=new PDO('mysql:host=localhost; dbname=proyectoyek','root','');
+	        $this ->dbcon>exec("set character set utf8");
+	        if(!$this->dbcon){
+	        	die("Conexion fail");
+	        }else {
+	    
+	        }
+       
 		}
 
 		/**public function insertCliente($nombre, $apeP, $apeM, $fnac, $edad, $peso, $altura, $tel, $dir, $dieta, $obs){
@@ -37,8 +49,10 @@
 
 
 		public function prepareQ($stmt){
-			return $this->_mysqli->prepare($stmt);
+			return $this->dbcon->prepare($stmt);
 		}
+
+
 
 	}
 

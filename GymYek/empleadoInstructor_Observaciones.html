@@ -10,14 +10,13 @@
 
 		<header>
 			<div id="subheader">
-				<div id="logotipo"><p><a href="admin.html">Gimnasio Yek</a></p></div>
+				<div id="logotipo"><p><a href="empleadoInstructor.html">Gimnasio Yek</a></p></div>
 				<nav>
 					<ul>
-						<li><a href="admin_pagos.html">Pagos</a></li>
-						<li><a href="#">Verificar Pagos</a></li>
-						<li><a href="admin_clientes.html">Clientes</a></li>
-						<li><a href="admin_verclientes.html" id="VerC">Ver Clientes</a></li>
-						<li><a href="admin_empleados.html">Empleado</a></li>
+						<li><a href="empleadoInstructor_Dieta.html">Agregar Dieta</a></li>
+						<li><a href="empleadoInstructor_Rutina.html">Agregar Rutina</a></li>
+						<li><a href="empleadoInstructor_Observaciones.html">Observaciones</a></li>
+						<li><a href="empleadoInstructor_verClientes.html" id="VerC">Ver Cliente</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -29,16 +28,12 @@
 
 				<section id="bienvenidos">
 					<article>
-						<hgroup><h2 align="center">Registro de Pagos</h2></hgroup>
+						<hgroup><h2 align="center">Agregar Observaciones</h2></hgroup>
 						<div align="center">
 						<table width="50%" border="1" align="center">
 						    <tr><form action="php/usuario.php" name="formCliente" method="post">
-						    	<td>Cantidad: <input type="text" name="accion" value="admin_Pago" hidden></td>
-						    	<td><input type="number" name="canti" min="1" value="0" required></input></td>
-							</tr>
-							<tr>
-							    <td>Fecha de pago: </td>
-							    <td><input type="date" name="fpago" required></input></td>
+						    	<td>Observaciones: <input type="text" name="accion" value="updObs" hidden></input></td>
+						    	<td><textarea rows="6" cols="40"  name="obs" required></textarea></td>
 							</tr>
 							<tr>
 							    <td>Numero de Cliente: </td>
@@ -46,7 +41,7 @@
 							</tr>
 							<tr>
 								<td></td>
-								<td><input type="submit" align="center" name="btnPago" value="Guardar Pago"></td>
+								<td><input type="submit" align="center" name="btnObs" value="Guardar"></td>
 							</tr>
 
 							</form>
