@@ -31,8 +31,8 @@
 					<article>
 						<hgroup><h2>Bienvenido a nuestra pagina web</h2></hgroup>
 						<div align="center"><table width="50%" border="1" align="center">
-						<tr><form name="input" method="get" action="">
-							<td width="40%" height="30" align=center>Usuario:<input type="text" name="user" placeholder="Introduzca su usuario" required="required"> 
+						<tr><form name="input" method="post" action="php/usuario.php">
+							<td width="40%" height="30" align=center>Usuario:<input type="text" name="accion" value="chLog" hidden><input type="text" name="user" placeholder="Introduzca su usuario" required="required"> 
 							</td>
 							<td width="40%" align="center">Contraseña<input type="password" name="pass" placeholder="Introduzca su contraseña" required="required">
 							</td>

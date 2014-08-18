@@ -1,18 +1,141 @@
 <?php
 	require_once("conexion.php");
-
-
-	/**
-	* 
-	*/
+					ob_start();
+				session_start();
 	class procesos
 	{
 		public $dbConx;
 		private $stmt;
+		public $idclie;
 		
+
 		function __construct()
 		{
 			$this->dbConx = DB::getInstance();
+		}
+
+		public  function logeo($name,$pass){
+
+			$tipou = "";
+
+			$stmt = "SELECT user, pass, idtipou, idclie FROM usuario WHERE user = ? AND pass = ?";
+			$query =$this->dbConx->prepareQ($stmt);
+			$query->bindParam(1,$name);
+			$query->bindParam(2,$pass);
+			$query->execute();
+
+			$row = $query->fetch();
+			
+			if($row['user']==$name & $row['pass']==$pass){
+
+				$_SESSION['username'] = $row['user'];
+				$tipou = $row['idtipou'];
+				$_SESSION['idcliente'] = $row['idclie'];
+				
+				switch ($tipou) {
+					case '1':
+						header("Location: /GymYek/admin.php");
+						$_SESSION['nivel'] = '1';
+						break;
+					case '2':
+						header("Location: /GymYek/empleado.php");
+						$_SESSION['nivel'] = '2';
+						break;
+					case '3':
+						header("Location: /GymYek/empleadoInstructor.php");
+						$_SESSION['nivel'] = '3';
+						break;
+					case '4':
+						header("Location: /GymYek/cliente.php");
+						$_SESSION['nivel'] = '4';
+						break;
+					default:
+						# code...
+						break;
+				}
+			}else{
+				header("Location: /GymYek/login.php");
+			}
+		}
+
+		public function selectRutina(){
+			
+			$stmt = "SELECT rutina, series, repeticiones, dia FROM rutina WHERE idclie = ?";
+			$query =$this->dbConx->prepareQ($stmt);
+			$query->bindParam(1, $_SESSION['idcliente']);
+
+			$query->execute();
+			
+			     	echo "<table width=50% border= 1 align=center>";
+            		
+               		echo "<tr>";
+	            		echo "<th>Rutina</th>";
+	            		echo "<th>Series</th>";
+	            		echo "<th>Repeticiones</th>";
+	            		echo "<th>Dia</th>";
+            		echo "</tr>";
+            		
+
+        	 while($row = $query->fetch())
+            	{
+            		echo "<form action=usuario.php method=post";
+            		echo "<tr>";
+	            		echo "<td>" .$row['rutina'].  " </td>";
+	            		echo "<td>" .$row['series'].  " </td>";
+	            		echo "<td>" .$row['repeticiones'].  " </td>";
+	            		echo "<td>" .$row['dia'].  " </td>";
+            		echo "</tr>";
+            		echo "</form>";
+        		}
+        		echo "</table>";
+		}
+
+		public function selectDieta(){
+			$stmt ="SELECT dieta from cliente WHERE idcliente = ?"; 
+            $query= $this->dbConx->prepareQ($stmt);
+            $query->bindParam(1, $_SESSION['idcliente']);
+        	$query->execute();
+
+        	echo "<table width=50% border= 1 align=center>";
+            		
+               		echo "<tr>";
+	            		echo "<th>Dieta</th>";
+            		echo "</tr>";
+            		
+
+        	 while($row = $query->fetch())
+            	{
+            		echo "<form action=usuario.php method=post";
+            		echo "<tr>";
+	            		echo "<td>" .$row['dieta'].  " </td>";
+            		echo "</tr>";
+            		echo "</form>";	
+        		}
+        		echo "</table>";
+		}
+
+		public function selectObservaciones(){
+			$stmt ="SELECT observaciones from cliente WHERE idcliente = ?"; 
+            $query= $this->dbConx->prepareQ($stmt);
+            $query->bindParam(1, $_SESSION['idcliente']);
+        	$query->execute();
+        	
+
+
+        	echo "<table width=50% border= 1 align=center>";
+               		echo "<tr>";
+	            		echo "<th>Observaciones del Instructor</th>";
+            		echo "</tr>";
+        	 while($row = $query->fetch())
+            	{
+            		echo "<form action=usuario.php method=post";
+            		echo "<tr>";
+	            		echo "<td>" .$row['observaciones'].  " </td>";
+            		echo "</tr>";
+            		
+            		echo "</form>";
+        		}
+        		echo "</table>";
 		}
 
 		public function insertCliente($nombre, $apeP, $apeM, $fnac, $edad, $peso, $altura, $tel, $dir, $dieta, $obs){
@@ -129,6 +252,7 @@
 				echo "faCHOOo la puta madre   ";
 			}
     	}
+
     	public function updClienObs($ob, $idcli){
     		$stmt ="UPDATE cliente SET observaciones = ? WHERE idcliente = ?"; 
             $query= $this->dbConx->prepareQ($stmt);
@@ -156,38 +280,83 @@
 			}else{
 				echo "faCHOOo la puta madre WN CULIaooo LA CSM";
 			}
+		}
+
+		public function difdeFecha($startdate, $enddate){
+			/**$stmt = "SELECT DATEDIFF('2014-08-15','2014-09-14')";**/
+			$dias = 31;
+
+			$stmt = "SELECT DATEDIFF(?, ?)";
+			
+			$query = $this->dbConx->prepareQ($stmt);
+			$query->bindParam(1, $startdate);
+			$query->bindParam(2, $enddate);
+			$query->execute();
+			$row = $query->fetchColumn();
+			
+			$res = $row;
+
+			if($res > 31){
+				echo "<td> Adeudo </td>";
+			}else{
+				echo "<td> Pagado </td>";
+			}
+		}
+
+		public function selectFechaPago($idclienow){
+			$stmt = "SELECT fpago FROM pagos WHERE idclie = ?";
+			
+			$query = $this->dbConx->prepareQ($stmt);
+			$query->bindParam(1, $idclienow);
+			
+			$query->execute();
+			$row = $query->fetch();
+
+			$res = $row['fpago'];
+
+			return $res;
+		}
+
+		public function checarFechaPago(){
+			$datenow = date('Y-m-d');
+
+			$stmt ="SELECT idcliente, nombre, apepat, apemat from cliente"; 
+            $query= $this->dbConx->prepareQ($stmt);
+        	$query->execute();
+        	
+
+
+        	echo "<table width=50% border= 1 align=center>";
+            		
+               		echo "<tr>";
+	            		echo "<th>ID Cliente</th>";
+	            		echo "<th>Nombre</th>";
+	            		echo "<th>Apellido Paterno</th>";
+	            		echo "<th>Apellido Materno</th>";
+	            		echo "<th>Estado de pago</th>";
+            		echo "</tr>";
+            		
+
+        	 while($row = $query->fetch())
+            	{	
+            		$idclientenow = $row['idcliente'];
+            		$startD = $this->selectFechaPago($idclientenow);
+            		
+            		echo "<tr>";
+	            		echo "<td>" .$row['idcliente'].  " </td>";
+	            		echo "<td>" .$row['nombre'].  " </td>";
+	            		echo "<td>" .$row['apepat'].  " </td>";
+	            		echo "<td>" .$row['apemat'].  " </td>";
+	            		$this->difdeFecha($datenow, $startD);
+	            		/**echo "<td> Chekeo de pago </td>";**/
+            		echo "</tr>";
+            		
+
+            		
+
+        		}
+        		echo "</table>";
 		}	
 
-
 	}
-
-		/**$dbConn = new procesos();
-
-		$nombre = $_POST['nombre'];
-		$apepat = $_POST['apepat'];
-		$apemat = $_POST['apemat'];
-		$fnac = $_POST['fnac'];
-		$edad = $_POST['edad'];
-		$peso = $_POST['peso'];
-		$altura = $_POST['altura'];
-		$telefono = $_POST['tel'];
-		$dir = $_POST['dir'];
-		$dieta = $_POST['dieta'];
-		$obs = $_POST['obs'];
-		
-		echo $fnac;
-
-
-		
-		$conx = $instance->getConexion();
-				
-		$conx = $instance->getConexion()
-
-
-		$dbConn->insertCliente($nombre, $apepat, $apemat, $fnac, $edad, $peso, $altura, $telefono, $dir, $dieta, $obs);
-
-		mysqli_query($dbConx->getConnection(), "INSERT INTO `usuarios`(`Nombre`, `Telefono`) VALUES ('$nombreRegistrado','$telefonoRegistrado')");
-
-		echo "<br> Guardado correctamente <br>";**/
-
 ?>

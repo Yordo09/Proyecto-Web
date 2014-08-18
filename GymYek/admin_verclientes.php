@@ -1,3 +1,30 @@
+<?php
+/**codigo para las sesiones**/
+	session_start();
+	
+	if (isset($_SESSION['username'])) {
+		switch ($_SESSION['nivel']) {
+			case '1':
+				
+				break;
+			case '2':
+				header("Location: /GymYek/empleado.php");
+				break;
+			case '3':
+				header("Location: /GymYek/empleadoInstructor.php");
+				break;
+			case '4';
+				header("Location: /GymYek/cliente.php");
+				break;
+			default:
+				# code...
+				break;
+		}
+		/**echo 'Welcome, '.$_SESSION['username'];**/
+	}else{
+		header("Location: /GymYek/login.php");
+	}
+?>
 <!DOCTYPE>
 <html>
 	<head>
@@ -12,14 +39,15 @@
 
 		<header>
 			<div id="subheader">
-				<div id="logotipo"><p><a href="admin.html">Gimnasio Yek</a></p></div>
+				<div id="logotipo"><p><a href="admin.php">Gimnasio Yek</a></p></div>
 				<nav>
 					<ul>
-						<li><a href="admin_pagos.html">Pagos</a></li>
-						<li><a href="#">Verificar Pagos</a></li>
-						<li><a href="admin_clientes.html">Clientes</a></li>
-						<li><a href="admin_verclientes.html" id="VerC">Ver Clientes</a></li>
-						<li><a href="admin_empleados.html">Empleado</a></li>
+						<li><a href="admin_pagos.php">Pagos</a></li>
+						<li><a href="admin_verPagos.php">Verificar Pagos</a></li>
+						<li><a href="admin_clientes.php">Clientes</a></li>
+						<li><a href="admin_verclientes.php" id="VerC">Ver Clientes</a></li>
+						<li><a href="admin_empleados.php">Empleado</a></li>
+						<li><a href="php/unset.php">Log Out</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -42,6 +70,7 @@
 						
 
 						</table>-->
+						</div>
 					</article>
 
 				</section>

@@ -26,7 +26,7 @@
 
 		public function Conectar(){
 	        $this ->dbcon=new PDO('mysql:host=localhost; dbname=proyectoyek','root','');
-	        $this ->dbcon>exec("set character set utf8");
+	        /**$this ->dbcon>exec("set character set utf8");**/
 	        if(!$this->dbcon){
 	        	die("Conexion fail");
 	        }else {

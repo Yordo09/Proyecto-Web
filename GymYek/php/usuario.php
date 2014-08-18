@@ -32,45 +32,61 @@
 
 		public function acciones(){
 			$this->getAct();
+			ob_start();
+			/**Cambiarle la URL a todos los heaeders!!! por http://proyectoyek.site40.net/admin_clientes.html**/
 			switch ($this->accion) {
+				case 'chLog':
+					$this->checkLogin();
+					break;
 				case 'inserClie':
 					$this->insertarCli();
-					header("Location: /GymYek/empleado_registroClientes.html");
+					header("Location: /GymYek/empleado_registroClientes.php");
 					/**echo "<a href = '/GymYek/empleado_registroClientes.html' > Volver al menu </a>";**/
 					break;
 				case 'admin_inserClie':
 					$this->insertarCli();
-					header("Location: /GymYek/admin_clientes.html");
+					header("Location: /GymYek/admin_clientes.php");
 					/**echo "<a href = '/GymYek/empleado_registroClientes.html' > Volver al menu </a>";**/
 					break;
 				case 'inserPago':
 					$this->insertarPag();
-					header("Location: /GymYek/empleado_registroPagos.html");
+					header("Location: /GymYek/empleado_registroPagos.php");
 					/**echo "<a href = '/GymYek/empleado_registroPagos.html' > Volver al menu </a>";**/
 					break;
 				case'admin_Pago':
 					$this->insertarPag();
-					header("Location: /GymYek/admin_pagos.html");
+					header("Location: /GymYek/admin_pagos.php");
 					break;
 				case 'admin_inserEmpleado':
 					$this->insertarEmpleado();					
-					header("Location: /GymYek/admin_empleados.html");
+					header("Location: /GymYek/admin_empleados.php");
 					break;
 				case 'Vcliente':
 					$this->verCliente();
-
 					break;
 				case 'updDieta':
 					$this->upClienDie();
-					header("Location: /GymYek/empleadoInstructor_Dieta.html");
+					header("Location: /GymYek/empleadoInstructor_Dieta.php");
 					break;
 				case 'updObs':
 					$this->upClienObs();
-					header("Location: /GymYek/empleadoInstructor_Observaciones.html");
+					header("Location: /GymYek/empleadoInstructor_Observaciones.php");
 					break;
 				case 'inserRutina':
 					$this->insertarRut();
-					header("Location: /GymYek/empleadoInstructor_Rutina.html");
+					header("Location: /GymYek/empleadoInstructor_Rutina.php");
+					break;
+				case 'VclientePago':
+					$this->verCliPago();
+					break;
+				case 'VclienteRutina':
+					$this->verCliRut();
+					break;
+				case 'VclienteDieta':
+					$this->verCliDiet();
+					break;
+				case 'VclienteObs':
+					$this->verCliObs();
 					break;
 				default:
 					# code...
@@ -300,8 +316,49 @@
 			$this->dia = $dia;
 		}
 
+		/**---------TABLA USUARIOS------------**/
+		public function getUsuario(){
+			return $this->usuario = $_POST['user'];
+		}
+		
+		public function setUsuario($usuario){
+			$this->usuario = $usuario;
+		}
+		
+		public function getPass(){
+			return $this->pass = $_POST['pass'];
+		}
+		
+		public function setPass($pass){
+			$this->pass = $pass;
+		}
+		
+		public function getidtipou(){
+			return $this->idtipou = $_POST['idtipou'];
+		}
+		
+		public function setidtipou($idtipou){
+			$this->idtipou = $idtipou;
+		}
+
 
 		/**---------FUNCIONES DE DB------------**/
+
+		public function checkLogin(){
+			$this->db->logeo($this->getUsuario(), $this->getPass());
+		}
+
+		public function verCliRut(){
+			$this->db->selectRutina();
+		}
+
+		public function verCliDiet(){
+			$this->db->selectDieta();
+		}
+
+		public function verCliObs(){
+			$this->db->selectObservaciones();
+		}
 
 		public function insertarCli(){
 			$this->db->insertCliente($this->getNombre(),$this->getApepat(),$this->getApemat(),
@@ -315,17 +372,17 @@
 				case 'Administrador':
 					$intvalue = 1;
 					$this->idEm = intval($intvalue);
-					echo $this->idEm;
+					/**echo $this->idEm;**/
 					break;
 				case 'Empleado':
 					$intvalue = 2;
 					$this->idEm = intval($intvalue);
-					echo $this->idEm;
+					/**echo $this->idEm;**/
 					break;
 				case 'Instructor':
 					$intvalue = 3;
 					$this->idEm = intval($intvalue);
-					echo $this->idEm;
+					/**echo $this->idEm;**/
 					break;
 
 				default:
@@ -347,6 +404,10 @@
 			$this->db->verClientes();
 		}
 
+		public function verCliPago(){
+			$this->db->checarFechaPago();
+		}
+
 		public function upClienDie(){
 			$this->db->updClienDieta($this->getDieta(), $this->getIdclie());
 		}
@@ -360,12 +421,5 @@
 			 $this->getDia(), $this->getIdclie());
 		}
 	}
-
-	
-
 	$us = new usuario();
-
-
-
-
 ?>

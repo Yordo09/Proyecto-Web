@@ -1,10 +1,35 @@
+<?php
+/**codigo para las sesiones**/
+	session_start();
+	
+	if (isset($_SESSION['username'])) {
+		switch ($_SESSION['nivel']) {
+			case '1':
+				
+				break;
+			case '2':
+				header("Location: /GymYek/empleado.php");
+				break;
+			case '3':
+				header("Location: /GymYek/empleadoInstructor.php");
+				break;
+			case '4';
+				header("Location: /GymYek/cliente.php");
+				break;
+			default:
+				# code...
+				break;
+		}
+		/**echo 'Welcome, '.$_SESSION['username'];**/
+	}else{
+		header("Location: /GymYek/login.php");
+	}
+?>
 <!DOCTYPE>
 <html>
 	<head>
 		<meta charset = "UTF-8">
 		<link rel="stylesheet" type="text/css" href="css/estilos.css"/>
-		<script type="text/javascript" src="script/jquery-1.11.1.js"></script>
-		<script type="text/javascript" src="script/llamar.js"></script>
 		<title>Gimnasio Yek</title>
 	</head>
 
@@ -12,13 +37,15 @@
 
 		<header>
 			<div id="subheader">
-				<div id="logotipo"><p><a href="empleado.html">Gimnasio Yek</a></p></div>
+				<div id="logotipo"><p><a href="admin.php">Gimnasio Yek</a></p></div>
 				<nav>
 					<ul>
-						<li><a href="empleado_registroPagos.html">Registrar Pagos</a></li>
-						<li><a href="#">Verificar Pagos</a></li>
-						<li><a href="empleado_registroClientes.html">Registro de Clientes</a></li>
-						<li><a href="empleado_verclientes.html" id="VerC">Ver Clientes</a></li>
+						<li><a href="admin_pagos.php">Pagos</a></li>
+						<li><a href="admin_verPagos.php">Verificar Pagos</a></li>
+						<li><a href="admin_clientes.php">Clientes</a></li>
+						<li><a href="admin_verclientes.php" id="VerC">Ver Clientes</a></li>
+						<li><a href="admin_empleados.php">Empleado</a></li>
+						<li><a href="php/unset.php">Log Out</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -34,7 +61,7 @@
 						<div align="center">
 						<table width="50%" border="1" align="center">
 						    <tr><form action="php/usuario.php" name="formCliente" method="post">
-						    	<td>Nombre: <input type="text" name="accion" value="inserClie" hidden></td>
+						    	<td>Nombre: <input type="text" name="accion" value="admin_inserClie" hidden></td>
 						    	<td><input type="text" name="nombre" required></input></td>
 							</tr>
 							<tr>
